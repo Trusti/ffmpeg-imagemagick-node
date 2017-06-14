@@ -10,6 +10,18 @@ export PKG_CONFIG_PATH=${SRC}/lib/pkgconfig
 
 yum install -y autoconf automake gcc gcc-c++ git libtool make nasm zlib-devel \
   openssl-devel tar cmake perl which bzip2
+yum install make gcc gcc-c++ -y
+
+# imagemagick
+DIR=$(mktemp -d) && cd ${DIR} && \
+  curl -s https://www.imagemagick.org/download/ImageMagick-${IMAGEMAGICK_VERSION}.tar.gz | \
+  tar zxvf - -C . && \
+  cd ${DIR}/ImageMagick-${IMAGEMAGICK_VERSION} && \
+  ./configure && \
+  make && \
+  make install && \
+  make distclean && \
+  rm -rf ${DIR}
 
 # yasm
 DIR=$(mktemp -d) && cd ${DIR} && \
@@ -168,7 +180,6 @@ DIR=$(mktemp -d) && cd ${DIR} && \
 yum history -y undo last && yum clean all && rm -rf /var/lib/yum/*
 
 # nodejs
-yum install make gcc gcc-c++ -y
 DIR=$(mktemp -d) && cd ${DIR} && \
   curl -s http://nodejs.org/dist/v${NODEJS_VERSION}/node-v${NODEJS_VERSION}.tar.gz | tar zxvf - -C . && \
   cd node-v* && \
