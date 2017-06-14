@@ -26,7 +26,8 @@ ENV           FFMPEG_VERSION=3.0.7   \
               XVID_VERSION=1.3.4     \
               FDKAAC_VERSION=0.1.5   \
               X265_VERSION=2.3       \
-              NODEJS_VERSION=6.9.5 
+              NODEJS_VERSION=6.9.5   \
+              IMAGEMAGICK_VERSION=7.0.6-0
 
 COPY          run.sh /tmp/run.sh
 
