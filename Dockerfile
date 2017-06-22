@@ -15,6 +15,7 @@ MAINTAINER    Raman Nanda <Raman148@gmail.com>
 
 ENV           FFMPEG_VERSION=3.0.7   \
               MPLAYER_VERSION=1.3.0  \
+              NASM_VERSION=2.13.01   \
               YASM_VERSION=1.3.0     \
               OGG_VERSION=1.3.2      \
               VORBIS_VERSION=1.3.5   \
@@ -30,9 +31,11 @@ ENV           FFMPEG_VERSION=3.0.7   \
               IMAGEMAGICK_VERSION=7.0.6-0
 
 COPY          run.sh /tmp/run.sh
+COPY          imagick.sh /tmp/imagick.sh
 
 # See https://github.com/Raman148/ffmpeg-nodejs/blob/master/run.sh
 RUN           echo "Installing now" && bash /tmp/run.sh
+RUN           echo "Installing now" && bash /tmp/imagick.sh
 
 # Let's make sure the app built correctly
 RUN           ffmpeg -buildconf

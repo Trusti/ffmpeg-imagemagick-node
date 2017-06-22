@@ -1,23 +1,21 @@
 #!/bin/bash
 
 set -euo pipefail
-
 echo "/usr/local/lib" > /etc/ld.so.conf.d/libc.conf
 
 export MAKEFLAGS="-j$[$(nproc) + 1]"
 export SRC=/usr/local
 export PKG_CONFIG_PATH=${SRC}/lib/pkgconfig
 
-yum install -y autoconf automake gcc gcc-c++ git libtool make nasm zlib-devel \
-  openssl-devel tar cmake perl which bzip2
+yum install -y autoconf automake gcc gcc-c++ git libtool make zlib-devel \
+ openssl-devel tar cmake perl which bzip2
 
-# imagemagick
-yum install make gcc gcc-c++ -y
+# nasm
 DIR=$(mktemp -d) && cd ${DIR} && \
-  curl -s https://www.imagemagick.org/download/ImageMagick-${IMAGEMAGICK_VERSION}.tar.gz | \
+  curl -s http://www.nasm.us/pub/nasm/releasebuilds/${NASM_VERSION}/nasm-${NASM_VERSION}.tar.gz | \
   tar zxvf - -C . && \
-  cd ${DIR}/ImageMagick-${IMAGEMAGICK_VERSION} && \
-  ./configure && \
+  cd ${DIR}/nasm-${NASM_VERSION} && \
+  ./configure --prefix="${SRC}" --bindir="${SRC}/bin" --docdir=${DIR} -mandir=${DIR}&& \
   make && \
   make install && \
   make distclean && \
