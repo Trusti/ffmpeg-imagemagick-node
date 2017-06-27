@@ -28,7 +28,7 @@ ENV           FFMPEG_VERSION=3.0.7   \
               FDKAAC_VERSION=0.1.5   \
               X265_VERSION=2.3       \
               NODEJS_VERSION=6.9.5   \
-              IMAGEMAGICK_VERSION=7.0.6-0
+              IMAGEMAGICK_VERSION=6.9.8-10
 
 COPY          run.sh /tmp/run.sh
 COPY          imagick.sh /tmp/imagick.sh
